@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title><%= todo.title %></title>
+
+    <link rel="stylesheet" href="/css/stylesheet">
+
+</head>
+
+<body>
+
+    <%- include("../partials/header") %>
+
+
+<div class="todo-detail">
+
+    <div class="todo-detail-header">
+
+        <div>
+
+            <h1>
+                <%= todo.title %>
+            </h1>
+
+            <% if (todo.completed) { %>
+
+                <span class="badge completed">
+                    Completed
+                </span>
+
+            <% } else { %>
+
+                <span class="badge pending">
+                    Pending
+                </span>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+
+    <div class="detail-section">
+
+        <h3>Description</h3>
+
+        <p>
+            <%= todo.description || "No description" %>
+        </p>
+
+    </div>
+
+
+    <div class="detail-section">
+
+        <h3>Created</h3>
+
+        <p>
+            <%= todo.createdAt.toLocaleString() %>
+        </p>
+
+    </div>
+
+
+    <div class="detail-section">
+
+        <h3>Last Updated</h3>
+
+        <p>
+            <%= todo.updatedAt.toLocaleString() %>
+        </p>
+
+    </div>
+
+
+    <div class="todo-actions">
+
+        <a
+            href="/<%= todo._id %>/edit"
+            class="btn btn-primary"
+        >
+            Edit Todo
+        </a>
+
+
+        <form
+            action="/<%= todo._id %>?_method=DELETE"
+            method="POST"
+        >
+
+            <button
+                type="submit"
+                class="btn btn-danger"
+            >
+                Delete Todo
+            </button>
+
+        </form>
+
+
+        <a
+            href="/"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+
+<%- include("../partials/footer") %>
+
+</body>
+
+</html>

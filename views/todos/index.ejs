@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+   <%- include("../partials/header") %>
+
+
+<div class="page-header">
+
+    <div>
+
+        <h1>My Todos</h1>
+
+        <p class="subtitle">
+            Manage your daily tasks
+        </p>
+
+    </div>
+
+    <a href="/new" class="btn btn-primary">
+        + Add Todo
+    </a>
+
+</div>
+
+
+<% if (todos.length === 0) { %>
+
+    <div class="empty-state">
+
+        <h2>No Todos Yet</h2>
+
+        <p>
+            Start by creating your first Todo.
+        </p>
+
+        <a
+            href="/new"
+            class="btn btn-primary"
+        >
+            Create Todo
+        </a>
+
+    </div>
+
+<% } else { %>
+
+    <div class="todo-grid">
+
+        <% todos.forEach(todo => { %>
+
+            <div class="todo-card">
+
+                <div class="todo-card-header">
+
+                    <h2>
+                        <%= todo.title %>
+                    </h2>
+
+                    <% if (todo.completed) { %>
+
+                        <span class="badge completed">
+                            Completed
+                        </span>
+
+                    <% } else { %>
+
+                        <span class="badge pending">
+                            Pending
+                        </span>
+
+                    <% } %>
+
+                </div>
+
+
+                <p class="description">
+
+                    <%= todo.description || "No description" %>
+
+                </p>
+
+
+                <div class="todo-actions">
+
+                    <a
+                        href="/<%= todo._id %>"
+                        class="btn btn-secondary"
+                    >
+                        View
+                    </a>
+
+                    <a
+                        href="/<%= todo._id %>/edit"
+                        class="btn btn-secondary"
+                    >
+                        Edit
+                    </a>
+
+                    <form
+                        action="/<%= todo._id %>?_method=DELETE"
+                        method="POST"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger"
+                        >
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+<% } %>
+
+
+<%- include("../partials/footer") %>
+</body>
+
+</html>
